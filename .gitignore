@@ -1,0 +1,12 @@
+node_modules
+public
+coverage
+.tmp
+.sass-cache
+.idea
+/.swp
+logs
+client/bower_components
+dist
+**/*.map
+/server/config/local.env.js
