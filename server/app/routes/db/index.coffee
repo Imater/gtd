@@ -2,9 +2,11 @@
 BaseRoute = require "../base-route"
 class DbRouter extends BaseRoute
   constructor: ()->
-    super
+    super "db"
+    self = @
     @router.get "/test", (req, res)->
-      res.status 200
-        .send "test ok"
+      self.makeRequest "queue/worker/db/test", {}, (err, answer)->
+        res.status 200
+          .send answer
 
 module.exports = (new DbRouter).router
