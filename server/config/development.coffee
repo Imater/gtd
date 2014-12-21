@@ -8,3 +8,5 @@ module.exports =
     password: "gtdhubapp"
     connectionTimeout: 15000
     vhost: "/gtdhub/db"
+  mongoose:
+    connectionString: "mongodb://localhost/gtd-dev"

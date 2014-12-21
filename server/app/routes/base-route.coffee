@@ -10,7 +10,7 @@ class BaseRoute
     @name = name
     @router = express.Router()
     @router.get "/ping", (req, res)->
-      channelPath = "queue/worker/#{self.name}"
+      channelPath = "queue/worker/#{self.name}/ping"
       queueReq =
         pingTime = Date.now()
       self.makeRequest channelPath, queueReq, (err, answer) ->
