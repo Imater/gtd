@@ -1,17 +1,22 @@
 #workers installer
-amqp = require "amqp"
+fs = require "fs"
 config = require "../config"
-amqp.conn = amqp.createConnection
-  host: config.amqp.host
-  port: config.amqp.port
-  login: config.amqp.login
-  password: config.amqp.password
-  connectionTimeout: config.amqp.connectionTimeout
-  authMechanism: "AMQPLAIN"
-  vhost: config.amqp.vhost
-  noDelay: true
-  ssl:
-    enabled: false
+amqpConnection = require "../components/amqp-connection.coffee"
 
-amqp.conn.on "ready", ->
-  console.info "connection ok"
+Rpc = require "../components/rpc"
+rpc = new Rpc(amqpConnection)
+
+amqpConnection.on "ready", ->
+  installWorkers()
+
+amqpConnection.on "error", (err) ->
+  console.info "Error", err
+installWorkers = ()->
+  fs.readdirSync(__dirname)
+    .forEach (file)->
+      fs.stat "#{__dirname}/#{file}", (err, fileInfo)->
+        if fileInfo.isDirectory()
+          installWorkerFromDir(file)
+
+installWorkerFromDir = (dir)->
+  worker = require "#{__dirname}/#{dir}/worker-#{dir}.coffee"
