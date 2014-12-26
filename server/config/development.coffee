@@ -1,6 +1,8 @@
 #config for development
+path = require "path"
 
 module.exports =
+  root: path.normalize(__dirname+"/../..")
   amqp:
     host: "localhost"
     port: 5672

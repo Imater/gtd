@@ -5,9 +5,10 @@ amqp = require "amqp"
 config = require "../config"
 server = require "http"
   .createServer app
-require("./routes") app
 
 amqp.connection = require "../components/amqp-connection.coffee"
+require("../config/express.coffee") app
+require("./routes") app
 
 amqp.connection.on "ready", ->
   server.listen 5000, "127.0.0.1", ->

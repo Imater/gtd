@@ -12,11 +12,11 @@ amqpConnection.on "ready", ->
 amqpConnection.on "error", (err) ->
   console.info "Error", err
 installWorkers = ()->
-  fs.readdirSync(".")
+  fs.readdirSync(__dirname)
     .forEach (file)->
-      fs.stat "./#{file}", (err, fileInfo)->
+      fs.stat "#{__dirname}/#{file}", (err, fileInfo)->
         if fileInfo.isDirectory()
           installWorkerFromDir(file)
 
 installWorkerFromDir = (dir)->
-  worker = require "./#{dir}/worker-#{dir}.coffee"
+  worker = require "#{__dirname}/#{dir}/worker-#{dir}.coffee"
