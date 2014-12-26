@@ -2,9 +2,11 @@
 BaseRoute = require "../base-route"
 class SearchRouter extends BaseRoute
   constructor: ()->
-    super
+    super "search"
+    self = @
     @router.get "/test", (req, res)->
-      res.status 200
-        .send "test search ok"
+      self.makeRequest "queue/worker/search/test", {}, (err, answer)->
+        res.status 200
+          .send answer
 
 module.exports = (new SearchRouter).router
