@@ -1,0 +1,7 @@
+{{frames}}
+hr
+.fm-frames
+  .fm-row(ng-repeat="row in frames.rows")
+    .fm-col(ng-repeat="col in row.cols")
+      .fm-frame(style="background: {{col.frame.background}}")
+        {{col}}

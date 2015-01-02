@@ -1,0 +1,9 @@
+{{frames}}
+<hr/>
+<div class="fm-frames">
+  <div ng-repeat="row in frames.rows" class="fm-row">
+    <div ng-repeat="col in row.cols" class="fm-col">
+      <div style="background: {{col.frame.background}}" class="fm-frame">{{col}}</div>
+    </div>
+  </div>
+</div>
