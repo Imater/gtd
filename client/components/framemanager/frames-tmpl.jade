@@ -1,7 +1,16 @@
-{{frames}}
-hr
 .fm-frames
-  .fm-row(ng-repeat="row in frames.rows")
-    .fm-col(ng-repeat="col in row.cols")
-      .fm-frame(style="background: {{col.frame.background}}")
-        {{col}}
+  .fm-row(
+    ng-repeat="row in frames.rows track by $index"
+    style="min-height: {{row.height}}"
+  )
+    .fm-table-inside
+      .fm-col(
+        ng-repeat="col in row.cols track by $index"
+        style="width: {{col.width}};"
+        ng-mousedown="col.mousedown($event)"
+      )
+        .fm-frame(
+          ng-repeat="frame in col.frames track by $index"
+          style="background: {{frame.background}};" +
+          "height: {{frame.height}}"
+        ) {{frame.background}}

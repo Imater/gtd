@@ -1,9 +1,32 @@
 .fm-frames {
+  display: table;
+  max-width: 1600px;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
   .fm-row {
-    .fm-col {
-      .fm-frame {
-        border: 1px solid #EEE;
-        padding: 15px;
+    display: table;
+    vertical-align: top;
+    width: 100%;
+    .fm-table-inside {
+      display: table-row;
+      .fm-col {
+        display: table-cell;
+        position: relative;
+        overflow: auto;
+        .fm-frame {
+          overflow: auto;
+          &:before {
+            content: "";
+            position: absolute;
+            right: 0;
+            top:0;
+            bottom: 0;
+            width: 4px;
+            background: rgba(0,0,0,0.2);
+            cursor: col-resize;
+          }
+        }
       }
     }
   }

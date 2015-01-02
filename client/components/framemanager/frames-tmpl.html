@@ -1,9 +1,10 @@
-{{frames}}
-<hr/>
+
 <div class="fm-frames">
-  <div ng-repeat="row in frames.rows" class="fm-row">
-    <div ng-repeat="col in row.cols" class="fm-col">
-      <div style="background: {{col.frame.background}}" class="fm-frame">{{col}}</div>
+  <div ng-repeat="row in frames.rows track by $index" style="min-height: {{row.height}}" class="fm-row">
+    <div class="fm-table-inside">
+      <div ng-repeat="col in row.cols track by $index" style="width: {{col.width}};" ng-mousedown="col.mousedown($event)" class="fm-col">
+        <div ng-repeat="frame in col.frames track by $index" style="background: {{frame.background}};height: {{frame.height}}" class="fm-frame">{{frame.background}}</div>
+      </div>
     </div>
   </div>
 </div>
