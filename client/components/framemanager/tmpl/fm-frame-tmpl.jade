@@ -1,0 +1,12 @@
+.fm-frame-wrap(ng-class="{'hide-top-menu': !frame.menu}")
+  .frame-top-header-menu(ng-if="frame.menu")
+    .frame-header
+      .header-title(ng-click="frame.menu.toggleOpen()")
+        .title {{frame.menu.selectedItem.title}}
+      .frame-menu-list
+        ul(ng-if="!frame.menu.open")
+          li(ng-repeat="menuItem in frame.menu.menuItems") {{menuItem.title}}
+  .frame-content
+    .content
+      .scroll
+        include ./lorem.jade

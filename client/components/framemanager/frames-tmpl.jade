@@ -13,4 +13,5 @@
           ng-repeat="frame in col.frames track by $index"
           style="background: {{frame.background}};" +
           "height: {{frame.height}}"
-        ) {{frame.background}}
+        )
+          .fm-frame-window(frame="frame")

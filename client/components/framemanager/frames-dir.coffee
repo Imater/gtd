@@ -30,12 +30,6 @@ class Col
 
 class Mouse
   constructor: (resizeElement)->
-    self = @
-    $injector = angular.injector(["gtdhubApp"])
-    $injector.invoke ($timeout, $rootScope)->
-      self.$timeout = $timeout
-      self.$rootScope = $rootScope
-      console.info self.$rootScope
     @resizeElement = resizeElement
   isMouseAboutEdge: (e) ->
     -5 < $(e.target).width() - e.offsetX < 5
@@ -46,6 +40,7 @@ class Mouse
     @startWidth = parseInt @resizeElement.width.replace(["px","%"], ["",""])
     @_registerMouseUp(e)
     @_registerMouseMove(e)
+    $("body").addClass "not-selectable"
     return
   _registerMouseUp: (e)->
     self = @
@@ -69,6 +64,7 @@ class Mouse
     $(window).off "mousemove"
   _finishResize: (e)->
     console.info "finish"
+    $("body").removeClass "not-selectable"
     e
 
 class Frame
@@ -78,12 +74,34 @@ class Frame
     height: 100
     background: undefined
 
+class Menu
+  constructor: (options) ->
+    _.merge @, @default, options
+    @selectedItem = @menuItems[@selected]
+    @open = false
+  default:
+    menuItems: [
+      title: "Дерево"
+    ,
+      title: "Редактор"
+    ,
+      title: "Календарь"
+    ,
+      title: "Карта ума"
+    ,
+      title: "Карточки"
+    ,
+      title: "- - -"
+    ]
+    selected: 0
+  toggleOpen: ()->
+    @open = !@open
+
 getFrames = ()->
   c11 = new Col
     frames: [
       new Frame
         height: "100%"
-        background: "lightblue"
     ]
     width: "100%"
 
@@ -99,7 +117,8 @@ getFrames = ()->
     frames: [
       new Frame
         height: "100%"
-        background: "red"
+        menu: new Menu
+          selected: 0
     ]
     width: "200px"
 
@@ -107,7 +126,8 @@ getFrames = ()->
     frames: [
       new Frame
         height: "100%"
-        background: "magenta"
+        menu: new Menu
+          selected: 1
     ]
     width: "auto"
 
@@ -143,4 +163,13 @@ angular.module "gtdhubApp"
     templateUrl: "components/framemanager/frames-tmpl.html"
     link: ($scope, $element, attrs)->
       $scope.frames = getFrames()
+
+angular.module "gtdhubApp"
+  .directive "fmFrameWindow", ()->
+    restrict: "C"
+    scope:
+      frame: "="
+    templateUrl: "components/framemanager/tmpl/fm-frame-tmpl.html"
+    link: ($scope, $element, attrs)->
+      #
 
