@@ -5,8 +5,10 @@
         .title {{frame.menu.selectedItem.title}}
       .frame-menu-list
         ul(ng-if="!frame.menu.open")
-          li(ng-repeat="menuItem in frame.menu.menuItems") {{menuItem.title}}
+          li(ng-repeat="menuItem in frame.menu.menuItems[frame.menu.selectedMenu]") {{menuItem.title}}
+        .next-menu-panel(ng-click="frame.menu.nextMenu()")
+          i.fa.fa-angle-right
   .frame-content
     .content
       .scroll
-        include ./lorem.jade
+        div(ui-view="v{{frame.index}}")

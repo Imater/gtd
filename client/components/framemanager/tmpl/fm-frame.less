@@ -25,12 +25,34 @@
           }
         }
         .frame-menu-list {
+          position: relative;
           ul {
             list-style: none;
             padding: 10px;
             margin: 0;
+            margin-right: 20px;
             li {
               padding: @padding-list;
+              cursor: pointer;
+              &:hover {
+                background: rgba(0,0,0,0.1);
+              }
+            }
+          }
+          .next-menu-panel {
+            position: absolute;
+            padding: 10px;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            i {
+              display: inline-block;
+              vertical-align: middle;
+              line-height: 100%;
+            }
+            &:hover {
+              background: rgba(0,0,0,0.1);
+              cursor: pointer;
             }
           }
         }
@@ -49,6 +71,7 @@
           height: 100%;
           overflow-y: scroll;
           padding: 5px;
+          word-break: break-all;
         }
       }
     }

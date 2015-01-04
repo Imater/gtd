@@ -67,9 +67,12 @@ class Mouse
     $("body").removeClass "not-selectable"
     e
 
+cnt = 0
 class Frame
   constructor: (options) ->
     _.merge @, @default, options
+    @index = cnt
+    cnt++;
   default:
     height: 100
     background: undefined
@@ -77,21 +80,45 @@ class Frame
 class Menu
   constructor: (options) ->
     _.merge @, @default, options
-    @selectedItem = @menuItems[@selected]
+    @selectedMenu = 0
+    @selectedItem = @menuItems[@selectedMenu][@selected]
     @open = false
+  nextMenu: ()->
+    if @selectedMenu >= @menuItems.length - 1
+      @selectedMenu = 0
+    else
+      @selectedMenu += 1
   default:
     menuItems: [
-      title: "Дерево"
+      [
+        title: "Дерево"
+        templateUrl: "app/tree/tree.html"
+        controller: "treeCtrl"
+      ,
+        title: "Редактор"
+      ,
+        title: "Календарь"
+      ,
+        title: "Карта ума"
+      ,
+        title: "Карточки"
+      ,
+        title: "- - -"
+      ]
     ,
-      title: "Редактор"
-    ,
-      title: "Календарь"
-    ,
-      title: "Карта ума"
-    ,
-      title: "Карточки"
-    ,
-      title: "- - -"
+      [
+        title: "План дня"
+      ,
+        title: "Поделиться"
+      ,
+        title: "Поиск"
+      ,
+        title: "Новости"
+      ,
+        title: "Контакты"
+      ,
+        title: "- - -"
+      ]
     ]
     selected: 0
   toggleOpen: ()->
