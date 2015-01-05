@@ -76,6 +76,11 @@ class Frame
   default:
     height: 100
     background: undefined
+  selectMenuItem: (menuItem)->
+    @viewName = menuItem.viewName
+  getController: ()->
+    @viewName
+
 
 class Menu
   constructor: (options) ->
@@ -92,10 +97,10 @@ class Menu
     menuItems: [
       [
         title: "Дерево"
-        templateUrl: "app/tree/tree.html"
-        controller: "treeCtrl"
+        viewName: "tree"
       ,
         title: "Редактор"
+        viewName: "editor"
       ,
         title: "Календарь"
       ,
@@ -137,6 +142,8 @@ getFrames = ()->
       new Frame
         height: "100%"
         background: "green"
+        menu: new Menu
+          selected: 0
     ]
     width: "150px"
 
@@ -144,6 +151,7 @@ getFrames = ()->
     frames: [
       new Frame
         height: "100%"
+        viewName: 'tree'
         menu: new Menu
           selected: 0
     ]
@@ -153,6 +161,7 @@ getFrames = ()->
     frames: [
       new Frame
         height: "100%"
+        viewName: 'editor'
         menu: new Menu
           selected: 1
     ]
@@ -191,12 +200,15 @@ angular.module "gtdhubApp"
     link: ($scope, $element, attrs)->
       $scope.frames = getFrames()
 
-angular.module "gtdhubApp"
-  .directive "fmFrameWindow", ()->
+app = angular.module "gtdhubApp"
+  .directive "fmFrameWindow", ($controller)->
     restrict: "C"
     scope:
       frame: "="
     templateUrl: "components/framemanager/tmpl/fm-frame-tmpl.html"
     link: ($scope, $element, attrs)->
-      #
+      $scope.viewList = app.viewList
+      $scope.$watch "frame.viewName", (newVal, oldVal)->
+        if (newVal or newVal != oldVal) and app.viewList[newVal]
+          $controller app.viewList[newVal].controller, {$scope: $scope}
 

@@ -4,18 +4,30 @@ angular.module('gtdhubApp').config ($stateProvider) ->
     templateUrl: 'app/home/home.html'
     controller: 'homeCtrl'
 
-angular.module('gtdhubApp').config ($stateProvider) ->
+app = angular.module('gtdhubApp').config ($stateProvider) ->
+  console.info app.viewList
+
+  views = ["v1", "v2", "v3", "v4"]
+  viewConfig = {}
+  setView = (v)->
+    result =
+      templateUrl: ($stateParams)->
+        console.info "loadView = ", $stateParams
+        viewName = $stateParams[v]
+        app.viewList[viewName].templateUrl if app.viewList[viewName]
+      controllerProvider: ($stateParams)->
+        viewName = $stateParams[v]
+        console.info "controller", viewName, app.viewList[viewName].controller
+        app.viewList[viewName].controller if app.viewList[viewName]
+    return result
+  for v in views
+    viewConfig[v] = setView(v)
+
+  console.info viewConfig
+
   $stateProvider.state 'home.tree',
-    url: '/tree/{p2}/{p3}'
-    views:
-      "v2":
-        templateUrl: ($stateParams)->
-          "app/#{$stateParams.p2}/#{$stateParams.p2}.html"
-        controller:  ($stateParams)->
-          "#{$stateParams.p2}Ctrl"
-      "v3":
-        templateUrl: ($stateParams)->
-          "app/#{$stateParams.p3}/#{$stateParams.p3}.html"
-        controller:  ($stateParams)->
-          "#{$stateParams.p3}Ctrl"
+    url: '/{v1}/{v2}/{v3}/{v4}/{note}'
+    views: viewConfig
+    onEnter: ()->
+      console.info "enter"
 
