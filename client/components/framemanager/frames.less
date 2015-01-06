@@ -1,0 +1,31 @@
+.fm-frames {
+  display: table;
+  max-width: 1600px;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  .fm-row {
+    display: table;
+    vertical-align: top;
+    width: 100%;
+    .fm-table-inside {
+      display: table-row;
+      .fm-col {
+        display: table-cell;
+        position: relative;
+        .fm-frame {
+          &:before {
+            content: "";
+            position: absolute;
+            right: 0px;
+            top:0;
+            bottom: 0;
+            width: 2px;
+            z-index: 1;
+            cursor: col-resize;
+          }
+        }
+      }
+    }
+  }
+}
