@@ -5,8 +5,6 @@ angular.module('gtdhubApp').config ($stateProvider) ->
     controller: 'homeCtrl'
 
 app = angular.module('gtdhubApp').config ($stateProvider) ->
-  console.info app.viewList
-
   views = ["v1", "v2", "v3", "v4"]
   viewConfig = {}
   setView = (v)->
@@ -23,10 +21,8 @@ app = angular.module('gtdhubApp').config ($stateProvider) ->
   for v in views
     viewConfig[v] = setView(v)
 
-  console.info viewConfig
-
   $stateProvider.state 'home.tree',
-    url: '/{v1}/{v2}/{v3}/{v4}/{note}'
+    url: '//{note}'
     views: viewConfig
     onEnter: ()->
       console.info "enter"

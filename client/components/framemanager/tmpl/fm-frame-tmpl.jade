@@ -7,7 +7,7 @@
         ul(ng-if="!frame.menu.open")
           li(
             ng-repeat="menuItem in frame.menu.menuItems[frame.menu.selectedMenu]"
-            ng-click="frame.selectMenuItem(menuItem)"
+            ng-click="frame.menu.selectMenuItem(menuItem)"
           )
             b {{menuItem.title}}
         .next-menu-panel(ng-click="frame.menu.nextMenu()")
@@ -15,4 +15,4 @@
   .frame-content
     .content
       .scroll
-        div(ng-include="viewList[frame.viewName].templateUrl")
+        div(ng-include="frame.menu.selectedItem.templateUrl")

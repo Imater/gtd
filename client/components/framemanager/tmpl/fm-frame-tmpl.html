@@ -7,7 +7,7 @@
       </div>
       <div class="frame-menu-list">
         <ul ng-if="!frame.menu.open">
-          <li ng-repeat="menuItem in frame.menu.menuItems[frame.menu.selectedMenu]" ng-click="frame.selectMenuItem(menuItem)"><b>{{menuItem.title}}</b></li>
+          <li ng-repeat="menuItem in frame.menu.menuItems[frame.menu.selectedMenu]" ng-click="frame.menu.selectMenuItem(menuItem)"><b>{{menuItem.title}}</b></li>
         </ul>
         <div ng-click="frame.menu.nextMenu()" class="next-menu-panel"><i class="fa fa-angle-right"></i></div>
       </div>
@@ -16,7 +16,7 @@
   <div class="frame-content">
     <div class="content">
       <div class="scroll">
-        <div ng-include="viewList[frame.viewName].templateUrl"></div>
+        <div ng-include="frame.menu.selectedItem.templateUrl"></div>
       </div>
     </div>
   </div>
