@@ -29,7 +29,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ui-view="" class="main-wrap">
+    <div ui-view="main" class="main-wrap">
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID
@@ -72,25 +72,25 @@
         <!-- build:js({.tmp,client}) app/app.js -->
           <script src="app/app.js"></script>
           <!-- injector:js -->
-          <script src="app/digests/plan-of-day/plan-of-day-ctrl.js"></script>
-          <script src="app/digests/plan-of-day/plan-of-day.js"></script>
-          <script src="app/editor/editor-ctrl.js"></script>
-          <script src="app/editor/editor.js"></script>
           <script src="app/home/home-ctrl.js"></script>
           <script src="app/home/home.js"></script>
-          <script src="app/tree/tree-ctrl.js"></script>
-          <script src="app/tree/tree.js"></script>
-          <script src="components/frame-manager/fm-frame-window-dir.js"></script>
+          <script src="app/view/digest/plan-of-day/plan-of-day-ctrl.js"></script>
+          <script src="app/view/digest/plan-of-day/plan-of-day.js"></script>
+          <script src="app/view/main/editor/editor-ctrl.js"></script>
+          <script src="app/view/main/editor/editor.js"></script>
+          <script src="app/view/main/tree/tree-ctrl.js"></script>
+          <script src="app/view/main/tree/tree.js"></script>
+          <script src="components/data-storage/data-storage.js"></script>
+          <script src="components/frame-manager/fm-classes/fm-col.js"></script>
+          <script src="components/frame-manager/fm-classes/fm-default-frames.js"></script>
+          <script src="components/frame-manager/fm-classes/fm-frame.js"></script>
+          <script src="components/frame-manager/fm-classes/fm-frames.js"></script>
+          <script src="components/frame-manager/fm-classes/fm-menu-items.js"></script>
+          <script src="components/frame-manager/fm-classes/fm-menu.js"></script>
+          <script src="components/frame-manager/fm-classes/fm-mouse.js"></script>
+          <script src="components/frame-manager/fm-classes/fm-row.js"></script>
+          <script src="components/frame-manager/fm-frame-window/fm-frame-window-dir.js"></script>
           <script src="components/frame-manager/fm-frames-dir.js"></script>
-          <script src="components/frame-manager/fm-service/fm-classes/fm-col.js"></script>
-          <script src="components/frame-manager/fm-service/fm-classes/fm-default-frames.js"></script>
-          <script src="components/frame-manager/fm-service/fm-classes/fm-frame.js"></script>
-          <script src="components/frame-manager/fm-service/fm-classes/fm-frames.js"></script>
-          <script src="components/frame-manager/fm-service/fm-classes/fm-menu-items.js"></script>
-          <script src="components/frame-manager/fm-service/fm-classes/fm-menu.js"></script>
-          <script src="components/frame-manager/fm-service/fm-classes/fm-mouse.js"></script>
-          <script src="components/frame-manager/fm-service/fm-classes/fm-row.js"></script>
-          <script src="components/frame-manager/fm-service/fm-service.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->
 </body>

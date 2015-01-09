@@ -22,8 +22,9 @@ module.exports = (grunt) ->
           client: false
           pretty: true
         files: [
-          src: "<%= yeoman.client %>/{app,components}/**/*.jade"
-          dest: ""
+          src: "{app,components}/**/*.jade"
+          cwd: "<%= yeoman.client %>"
+          dest: ".tmp/"
           ext: ".html"
           expand: true
         ]
@@ -94,7 +95,7 @@ module.exports = (grunt) ->
       jade:
         files: ["<%= yeoman.client %>/{app,components}/**/*.jade"]
         tasks: [
-          "jade"
+          "newer:jade"
         ]
 
       injectCss:

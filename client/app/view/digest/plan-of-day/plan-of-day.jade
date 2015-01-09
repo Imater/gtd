@@ -1,0 +1,4 @@
+h4 План дня
+  ul
+    li(ng-repeat="plan in plans")
+      b(ui-sref="home.note({note: plan})") {{plan}}

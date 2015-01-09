@@ -1,0 +1,48 @@
+@startuml
+
+class DataStorageService {
+  get()
+  set()
+}
+
+class Diff {
+  makePatch()
+  applyPatch()
+}
+
+class DeltaStorage {
+  get()
+  set()
+  compact()
+}
+
+class MemoryStorage {
+  get()
+  set()
+}
+
+class BrowserStorage {
+  get()
+  set()
+}
+
+class Compress {
+  compress()
+  decompress()
+}
+
+class StorageEngine {
+  get()
+  set()
+}
+
+DataStorageService <-- MemoryStorage
+DataStorageService <-- DeltaStorage
+
+DeltaStorage <-- BrowserStorage
+
+BrowserStorage <-- Diff
+BrowserStorage <-- Compress
+BrowserStorage <-- StorageEngine
+
+@enduml
